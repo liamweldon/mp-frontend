@@ -9,7 +9,7 @@ export default class RecipeService {
 	return this.instance;
  	}
 	getRecipes = () =>
-	fetch(`${API_ROOT}/recipes`, {
+	fetch(`${API_ROOT}/recipes/myRecipes`, {
 		method: 'GET',
 		headers: {
 			'Content-Type' : 'application/json'
@@ -17,7 +17,7 @@ export default class RecipeService {
 	}).then((response) => response.json());
 
 	getRecipeById = (id) => 
-		fetch(`${API_ROOT}/recipes/${id}`, {
+		fetch(`${API_ROOT}/recipes/details/${id}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type' : 'application/json'

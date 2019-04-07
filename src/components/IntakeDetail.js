@@ -23,19 +23,22 @@ class IntakeDetail extends Component {
 					type: intakeJson.intake.tyoe};
 		}).then(({id, type}) => {
 			if(type === "STK") {
-				src = await this.stockService.getStockById(id);
-				this.setState({type: type, src: src});
+				this.stockService.getStockById(id).then((src) => {
+					this.setState({type: type, src: src});
+				})
+				
 
 			}
 			else if(type === "RCP") {
-				src = await this.recipeService.getRecipeById(id);
-				this.setState({type: type, src: src})
+				this.recipeService.getRecipeById(id).then((src) => {
+					this.setState({type: type, src: src});
+				})
 			}
 		})
 	}
 	render() {
 		return (
-			<Label> Recipe Detail Here </Label>
+			<label> Recipe Detail Here </label>
 		)
 	}
 }

@@ -14,9 +14,8 @@ class StockList extends Component {
 		this.consume = this.consume.bind(this);
 	}
 	componentDidMount() {
-		this.stockService.getStocks().then((stocksJson) => {
-			//TODO: link
-			this.setState(stocksJson.stocks);
+		this.stockService.getStocks().then((stocks) => {
+			this.setState({stocks: stocks});
 		} )
 	}
 
@@ -46,7 +45,7 @@ class StockList extends Component {
 							{"" + stock.quantity + " " + stock.product.householdServingSizeUom}
 						</td>
 						<td>
-							{stock.expirationDate}
+							{stock.product.exprRate}
 						</td>
 						<td>
 						<button onClick={() => this.consume(stock)}>

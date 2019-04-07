@@ -12,9 +12,9 @@ class RecipeList extends Component {
 	}
 
 	componentDidMount() {
-		this.recipeService.getRecipes().then((recipesJson) => {this.setState(
-				//TODO: link
-				{recipes: recipesJson.recipes}
+		this.recipeService.getRecipes().then((recipes) => {
+			this.setState(
+				{recipes: recipes}
 			)});
 	}
 
