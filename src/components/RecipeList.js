@@ -40,7 +40,7 @@ class RecipeList extends Component {
 									<Link to={`/recipes/${recipe.recipeId}`}> {recipe.name} </Link>
 								</td>
 								<td>
-									{recipe.description}
+									{recipe.descriptions}
 								</td>
 								<td>
 									<button onClick={() => this.consume(recipe)}>

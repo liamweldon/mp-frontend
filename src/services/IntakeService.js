@@ -26,17 +26,19 @@ export default class IntakeService {
 
 	// type is "STK" or "RCP"
 	addIntake = (sourceId, servings, intakeDate, type) => {
+		let formatted = new Date(intakeDate);
+		//TODO: date formatting
 		fetch(`${API_ROOT}/intakes`, {
 		method: 'POST',
 		headers: {
 			'Content-Type' : 'application/json'
 		},
-		body : {
+		body : JSON.stringify({
 			sourceId: sourceId,
 			servings: servings,
-			intakeDate: intakeDate,
+			intakeDate: formatted,
 			type: type
-		}
+		})
 	}).then((response) => response.json());
 	}
 	

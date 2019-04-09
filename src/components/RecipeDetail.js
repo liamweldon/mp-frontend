@@ -3,7 +3,6 @@ import RecipeService from '../services/RecipeService';
 
 class RecipeDetail extends Component {
 
-//TODO: Link
 	constructor(props) {
 		super(props);
 		this.recipeService = RecipeService.getInstance();
@@ -11,8 +10,8 @@ class RecipeDetail extends Component {
 
 	componentDidMount() {
 		const id = parseInt(this.props.match.params.id);
-		this.intakeService.getRecipeById(id).then((recipeJson) => {
-			this.setState({recipe: recipeJson.recipe})
+		this.recipeService.getRecipeById(id).then((recipe) => {
+			this.setState({recipe: recipe})
 		})
 	}
 

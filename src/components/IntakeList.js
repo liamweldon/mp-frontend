@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import IntakeService from '../services/IntakeService';
+import {Link} from 'react-router-dom';
 
 class IntakeList extends Component {
 
@@ -9,9 +11,8 @@ class IntakeList extends Component {
 	}
 
 	componentDidMount() {
-		this.intakeService.getIntakes().then((intakesJson) => {this.setState(
-				//TODO: link
-				{intakes: intakesJson.intakes}
+		this.intakeService.getIntakes().then((intakes) => {this.setState(
+				{intakes: intakes}
 			)});
 	}
 
@@ -28,7 +29,7 @@ class IntakeList extends Component {
 						{this.state.intakes.map((intake) => (
 							<tr key={intake.intakeId}>
 								<td> 
-									<Link to=`/intakes/${intake.intakeId}`> {Date.toDateString(intake.intakeDate)} </Link>
+									<Link to={`/intakes/${intake.intakeId}`}> {new Date(intake.intakeDate).toDateString()} </Link>
 								</td>
 							</tr>
 						))}

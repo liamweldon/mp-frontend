@@ -21,6 +21,7 @@ class StockList extends Component {
 
 	consume(stock) {
 		// TODO: dont consume entire quantity
+		console.log(stock);
 		this.intakeService.addIntake(stock.stockId, stock.quantity, Date.now(), "STK");
 	}
 
