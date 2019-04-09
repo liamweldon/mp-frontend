@@ -31,12 +31,12 @@ export default class RecipeService {
 		headers: {
 			'Content-Type' : 'application/json'
 		},
-		body : {
+		body : JSON.stringify({
 			sourceId: sourceId,
 			servings: servings,
 			intakeDate: intakeDate,
 			type: type
-		}
+		})
 	}).then((response) => response.json());
 	}
 	

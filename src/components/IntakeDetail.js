@@ -17,10 +17,10 @@ class IntakeDetail extends Component {
 	}
 	componentDidMount() {
 		const id = parseInt(this.props.match.params.id);
-		this.intakeService.getIntakeById(id).then((intakeJson) => {
-			this.setState({intake: intakeJson.intake})
-			return { id: intakeJson.intake.sourceId,
-					type: intakeJson.intake.tyoe};
+		this.intakeService.getIntakeById(id).then((intake) => {
+			this.setState({intake: intake})
+			return { id: intake.sourceId,
+					type: intake.tyoe};
 		}).then(({id, type}) => {
 			if(type === "STK") {
 				this.stockService.getStockById(id).then((src) => {
@@ -38,7 +38,7 @@ class IntakeDetail extends Component {
 	}
 	render() {
 		return (
-			<label> Recipe Detail Here </label>
+			<label> Recipe detail Here </label>
 		)
 	}
 }

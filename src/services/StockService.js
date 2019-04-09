@@ -30,10 +30,10 @@ export default class StockService {
 		headers: {
 			'Content-Type' : 'application/json'
 		},
-		body : {
+		body : JSON.stringify({
 			ndb_number: ndb,
 			quantity: quantity
-		}
+		})
 	}).then((response) => response.json());
 	}
 	
