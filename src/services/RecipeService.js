@@ -1,4 +1,4 @@
-import {API_ROOT} from '../api-config';
+import {API_ROOT} from '../constants';
 
 export default class RecipeService {
 	static instance = null;
@@ -17,7 +17,7 @@ export default class RecipeService {
 	}).then((response) => response.json());
 
 	getRecipeById = (id) => 
-		fetch(`${API_ROOT}/recipes/details/${id}`, {
+		fetch(`${API_ROOT}/recipes/detailed/${id}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type' : 'application/json'

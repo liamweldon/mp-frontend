@@ -61,9 +61,6 @@ class StockList extends Component {
 			{ this.state.selectedStock &&
 		<Modal
           show={this.state.modalVisible}>
-          <Modal.Header>
-            <Modal.Title>{this.state.selectedStock.product.longName}</Modal.Title>
-          </Modal.Header>
               <Modal.Body> <StockItemDetail stock={this.state.selectedStock} stockItems={this.state.selectedStockItems}>  </StockItemDetail> </Modal.Body>
           <Modal.Footer>
           	<Button variant="primary" onClick={() => this.setState({modalVisible: false, selectedStock: false})} >

@@ -1,4 +1,4 @@
-import {API_ROOT} from '../api-config';
+import {API_ROOT, MONTHS} from '../constants';
 
 export default class IntakeService {
 	static instance = null;
@@ -26,8 +26,12 @@ export default class IntakeService {
 
 	// type is "STK" or "RCP"
 	addIntake = (sourceId, servings, intakeDate, type) => {
-		let formatted = new Date(intakeDate);
-		//TODO: date formatting
+		let dateAsObj = new Date(intakeDate);
+		//TODO: abstract out date formatting?
+		let formatted = '' + dateAsObj.getDate() + ' ' + MONTHS[dateAsObj.getMonth()] + ' ' +
+			dateAsObj.getFullYear() + ' ' + dateAsObj.getHours() + ':' + dateAsObj.getMinutes() +
+			':' + dateAsObj.getSeconds();
+
 		fetch(`${API_ROOT}/intakes`, {
 		method: 'POST',
 		headers: {
