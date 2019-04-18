@@ -34,7 +34,7 @@ class IntakeDetail extends Component {
 									{ingredient.product.longName}
 								</td>
 								<td>
-									{this.getServingString(ingredient.servings, 
+									{this.getServingString(this.props.intake.servings * ingredient.servings, 
 										ingredient.product.householdServingSize, ingredient.product.householdServingSizeUom)}
 								</td>
 							</tr>
@@ -46,7 +46,7 @@ class IntakeDetail extends Component {
 			{this.props.intake.type === "STK" &&
 			<div>
 				<h2> {this.props.source.product.longName} </h2>
-				{this.getServingString(this.props.source.quantity, this.props.source.product.householdServingSize,
+				{this.getServingString(this.props.intake.servings, this.props.source.product.householdServingSize,
 					this.props.source.product.householdServingSizeUom)}
 			</div>
 			}
