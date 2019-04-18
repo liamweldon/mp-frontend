@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import StockService from '../services/StockService';
 import IntakeService from '../services/IntakeService';
+import {Link} from 'react-router-dom';
+import StockItemDetail from './StockItemDetail';
+import {Modal, Button} from 'react-bootstrap';
+
 
 
 class StockList extends Component {
@@ -9,20 +13,26 @@ class StockList extends Component {
 		this.stockService = StockService.getInstance();
 		this.intakeService = IntakeService.getInstance();
 		this.state = {
-			stocks : []
+			stocks : [],
+			selectedStockItems: [],
+			selectedStock: false,
+			modalVisible: false
 		}
-		this.consume = this.consume.bind(this);
+		this.stockClicked.bind(this);
 	}
 	componentDidMount() {
 		this.stockService.getStocks().then((stocks) => {
+			console.log('reeeeeee');
 			this.setState({stocks: stocks});
 		} )
 	}
 
-	consume(stock) {
-		// TODO: dont consume entire quantity
-		console.log(stock);
-		this.intakeService.addIntake(stock.stockId, stock.quantity, Date.now(), "STK");
+	stockClicked(stock) {
+		this.stockService.getStockItemsFromStockId(stock.stockId).then((stockItems) => {
+			this.setState({selectedStockItems: stockItems,
+			modalVisible: true,
+			selectedStock: stock});
+		})
 	}
 
 	render() {
@@ -34,31 +44,36 @@ class StockList extends Component {
 					<tr className="header-row">
 						<td> Product Name </td>
 						<td> Quantity </td>
-						<td> Expiration Date </td>
-						<td />
 					</tr>
 				{this.state.stocks.map((stock) => (
 					<tr key={stock.stockId}>
-						<td> 
-							{stock.product.longName}
+						<td onClick={() => this.stockClicked(stock)}> 
+							 {stock.product.longName}
 						</td>
 						<td>
 							{"" + stock.quantity + " " + stock.product.householdServingSizeUom}
-						</td>
-						<td>
-							{stock.product.exprRate}
-						</td>
-						<td>
-						<button onClick={() => this.consume(stock)}>
-							CONSUME
-						</button>
 						</td>
 					</tr>
 					))}
 
 				</tbody>
 			</table>
+			{ this.state.selectedStock &&
+		<Modal
+          show={this.state.modalVisible}>
+          <Modal.Header>
+            <Modal.Title>{this.state.selectedStock.product.longName}</Modal.Title>
+          </Modal.Header>
+              <Modal.Body> <StockItemDetail stock={this.state.selectedStock} stockItems={this.state.selectedStockItems}>  </StockItemDetail> </Modal.Body>
+          <Modal.Footer>
+          	<Button variant="primary" onClick={() => this.setState({modalVisible: false, selectedStock: false})} >
+          	Close
+          	</Button>
+          	</Modal.Footer>
+          	</Modal> 
+          }
 		</div>
+	
 		)
 	}
 }

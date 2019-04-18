@@ -17,14 +17,14 @@ export default class StockService {
 	}).then((response) => response.json());
 
 	getStockById = (id) => 
-		fetch(`${API_ROOT}/stocks/${id}`, {
+		fetch(`${API_ROOT}/stocks/one/${id}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type' : 'application/json'
 		}
 	}).then((response) => response.json());
 
-	addStock = (ndb, quantity) => {
+	addStock = (ndb, quantity) => 
 		fetch(`${API_ROOT}/stocks`, {
 		method: 'POST',
 		headers: {
@@ -35,7 +35,14 @@ export default class StockService {
 			quantity: quantity
 		})
 	}).then((response) => response.json());
-	}
+	
+	getStockItemsFromStockId = (id) =>
+		fetch(`${API_ROOT}/stock/all/${id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type' : 'application/json'
+			}
+		}).then((response) => response.json());
 	
 
 }

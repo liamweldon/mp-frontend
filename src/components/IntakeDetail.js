@@ -38,7 +38,7 @@ class IntakeDetail extends Component {
 	}
 	render() {
 		return (
-			<label> Recipe detail Here </label>
+			<label> Intake detail Here </label>
 		)
 	}
 }

@@ -25,7 +25,7 @@ export default class ProductService {
 	}).then((response) => response.json());
 	
 	getProductByNDB = (ndb) => 
-		fetch(`${API_ROOT}/product/${ndb}`, {
+		fetch(`${API_ROOT}/products/${ndb}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type' : 'application/json'

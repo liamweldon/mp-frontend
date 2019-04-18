@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import StockList from './components/StockList';
 import RecipeList from './components/RecipeList';
+import StockItemDetail from './components/StockItemDetail';
 import RecipeDetail from './components/RecipeDetail';
 import IntakeList from './components/IntakeList';
 import IntakeDetail from './components/IntakeDetail';
@@ -58,6 +59,7 @@ class App extends Component {
             <Route path="/stocks" exact component={StockList} />
             <Route path="/recipes" exact component={RecipeList} />
             <Route path="/intakes" exact component={IntakeList} />
+            <Route path="/stocks/:id" exact component={StockItemDetail} /> 
             <Route path="/recipes/:id" exact component={RecipeDetail} /> 
             <Route path="/intakes/:id" exact component={IntakeDetail} /> 
           </div>
