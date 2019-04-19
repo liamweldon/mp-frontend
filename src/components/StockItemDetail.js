@@ -26,7 +26,6 @@ class StockItemDetail extends Component {
 			numToConsume = stockItem.quantity;
 		}
 		if (numToConsume > 0) {
-			//TODO: does this delete the stock item?
 			this.intakeService.addIntake(stockItem.stockItemId, numToConsume, Date.now(), "STK");
 		}
 			

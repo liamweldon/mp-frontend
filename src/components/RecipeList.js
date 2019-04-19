@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import RecipeService from '../services/RecipeService';
+import IntakeService from '../services/IntakeService';
 import {Link} from 'react-router-dom';
 
 class RecipeList extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {recipes: []}
+		this.state = {recipes: [], num:0}
 		this.recipeService = RecipeService.getInstance();
+		this.intakeService = IntakeService.getInstance();
 		this.consume = this.consume.bind(this)
 	}
 
@@ -19,10 +21,17 @@ class RecipeList extends Component {
 	}
 
 	consume(recipe) {
-		// TODO: dont consume entire quantity
-		this.intakeService.addIntake(recipe.recipeId, recipe.yield, Date.now(), "RCP");
+		//TODO: validate ingredients available
+		let numToConsume = this.state.num;
+		if(numToConsume > 0) {
+			this.intakeService.addIntake(recipe.recipeId, numToConsume, Date.now(), "RCP");
+		}
+		
 	}
 
+	handleNumChange(e) {
+		this.setState({num: e.target.value})
+	}
 	render() {
 		return (
 			<div>
@@ -32,6 +41,7 @@ class RecipeList extends Component {
 						<tr className="header-row">
 							<td> Recipe Name </td>
 							<td> Description </td>
+							<td />
 							<td />
 						</tr>
 						{this.state.recipes.map((recipe) => (
@@ -46,6 +56,9 @@ class RecipeList extends Component {
 									<button onClick={() => this.consume(recipe)}>
 										CONSUME
 									</button>
+								</td>
+								<td>
+									<input type="text" pattern="[0-9]*" onChange={this.handleNumChange.bind(this)} defaultValue="0" />
 								</td>
 							</tr>
 						))}

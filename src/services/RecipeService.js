@@ -40,5 +40,11 @@ export default class RecipeService {
 	}).then((response) => response.json());
 	}
 	
-
+	getAvailableRecipes = () => 
+		fetch(`${API_ROOT}/recipes/available`, {
+		method: 'GET',
+		headers: {
+			'Content-Type' : 'application/json'
+		}
+	}).then((response) => response.json());
 }

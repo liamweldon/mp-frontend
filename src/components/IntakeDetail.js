@@ -15,7 +15,7 @@ class IntakeDetail extends Component {
 		let quantity = servings * hhServingSize;
 		return '' + quantity + ' ' + hhServingUom;
 	}
-
+	//TODO: bug if all stock has been deleted
 	render() {
 		return (
 			<div>
