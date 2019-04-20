@@ -64,6 +64,7 @@ class RecipeList extends Component {
 						))}
 					</tbody>
 				</table>
+				<Link to={`/recipe/new`}> Create Recipe </Link>
 			</div>
 		)
 	}

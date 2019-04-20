@@ -95,7 +95,7 @@ class RecipeDetail extends Component {
 						))}
 					</tbody>
 				</table>
-				{this.state.recipe.overallRating &&
+				{this.state.recipe.ratings > 0 &&
 					<h5> Rated {this.state.recipe.overallRating}/5 from {" "}
 					{this.state.recipe.ratings} users </h5>
 				}

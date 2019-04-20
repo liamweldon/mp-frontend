@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import RecipeService from '../services/RecipeService';
 
 class NewRecipe extends Component {
 
 	constructor(props) {
 		super(props);
+		this.recipeService = RecipeService.getInstance();
 		this.state = {newRecipe: 
 						{
 						name: false,
@@ -13,7 +15,7 @@ class NewRecipe extends Component {
 						ingredients: [],
 						tags: []
 						},
-					nextIngredient: false,
+					nextIngredient: {},
 					nextTag: false
 					}
 		this.handleChange.bind(this);
@@ -30,7 +32,15 @@ class NewRecipe extends Component {
 	}
 
 	handleNextIngredientChange(e) {
-		this.setState({nextIngredient: e.target.value});
+		let nextIngredient = this.state.nextIngredient;
+		nextIngredient.product= {ndb: e.target.value};
+		this.setState({nextIngredient: nextIngredient});
+	}
+
+	handleNextIngredientServingChange(e) {
+		let nextIngredient = this.state.nextIngredient;
+		nextIngredient.servings = e.target.value;
+		this.setState({nextIngredient: nextIngredient});
 	}
 
 	handleNextTagChange(e) {
@@ -40,7 +50,7 @@ class NewRecipe extends Component {
 	addIngredient() {
 		let newRecipe = this.state.newRecipe;
 		newRecipe.ingredients.push(this.state.nextIngredient);
-		this.setState({newRecipe: newRecipe});
+		this.setState({newRecipe: newRecipe, nextIngredient: {}});
 	}
 
 	addTag() {
@@ -68,6 +78,8 @@ class NewRecipe extends Component {
 	}
 
 	handleSubmit() {
+		//TODO field validation
+		this.recipeService.addRecipe(this.state.newRecipe);
 	}
 
 	render() {
@@ -92,11 +104,17 @@ class NewRecipe extends Component {
 					<input value={this.state.newRecipe.yield? this.state.newRecipe.yield: ""} onChange={this.handleChange("yield")} />
 				</tr>
 				<tr>
-					Ingredients NDBs:
+				<tl>
+					{"Ingredients NDBs"}
+				</tl>
+				<tl>
+				{" " + "Servings"}
+				</tl>
 				</tr>
 					{this.state.newRecipe.ingredients.map((ingredient) => 
 						<div>
-						<tr key={ingredient}> {ingredient + " "}
+						<tr key={ingredient.product.ndb}> 
+						{ingredient.product.ndb + " " + ingredient.servings + " "}
 						<button onClick={() => this.removeIngredient(ingredient)}>
 							Remove
 						</button>
@@ -104,7 +122,8 @@ class NewRecipe extends Component {
 						</div>
 					)
 					}
-					<input type="text" value={this.state.nextIngredient? this.state.nextIngredient: ""} onChange={this.handleNextIngredientChange.bind(this)} />
+					<input type="text" value={this.state.nextIngredient.product? this.state.nextIngredient.product.ndb: ""} onChange={this.handleNextIngredientChange.bind(this)} />
+					<input type="number" value={this.state.nextIngredient.servings? this.state.nextIngredient.servings : 0} onChange={this.handleNextIngredientServingChange.bind(this)} />
 					<button onClick={this.addIngredient.bind(this)}>
 							ADD INGREDIENT
 					</button>
