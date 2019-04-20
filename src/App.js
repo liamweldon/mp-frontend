@@ -8,8 +8,10 @@ import StockList from './components/StockList';
 import RecipeList from './components/RecipeList';
 import StockItemDetail from './components/StockItemDetail';
 import RecipeDetail from './components/RecipeDetail';
+import NewRecipe from './components/NewRecipe';
 import IntakeList from './components/IntakeList';
 import IntakeDetail from './components/IntakeDetail';
+import ProductList from './components/ProductList';
 
 class App extends Component {
 
@@ -45,6 +47,9 @@ class App extends Component {
                   <Link to="/stocks">Stock</Link>
                 </li>
                 <li>
+                  <Link to="/products">Products</Link>
+                </li>
+                <li>
                 <Link to="/recipes">Recipes</Link>
                 </li>
                 <li>
@@ -55,9 +60,11 @@ class App extends Component {
               </ul>
             </nav>
             <Route path="/login" exact component={() => <Login callback={this.setLoggedIn} loggedIn={this.state.loggedIn}></Login>} />
+            <Route path="/products" exact component={ProductList} />
             <Route path="/register" exact component={Register} />
             <Route path="/stocks" exact component={StockList} />
             <Route path="/recipes" exact component={RecipeList} />
+            <Route path="/recipe/new" exact component={NewRecipe} />
             <Route path="/intakes" exact component={IntakeList} />
             <Route path="/stocks/:id" exact component={StockItemDetail} /> 
             <Route path="/recipes/:id" exact component={RecipeDetail} /> 

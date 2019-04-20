@@ -25,18 +25,13 @@ export default class RecipeService {
 	}).then((response) => response.json());
 
 	// type is "STK" or "RCP"
-	addRecipe = (sourceId, servings, intakeDate, type) => {
+	addRecipe = (recipe) => {
 		fetch(`${API_ROOT}/recipes`, {
 		method: 'POST',
 		headers: {
 			'Content-Type' : 'application/json'
 		},
-		body : JSON.stringify({
-			sourceId: sourceId,
-			servings: servings,
-			intakeDate: intakeDate,
-			type: type
-		})
+		body : JSON.stringify(recipe)
 	}).then((response) => response.json());
 	}
 	

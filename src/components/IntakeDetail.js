@@ -5,7 +5,6 @@ import RecipeService from '../services/RecipeService';
 
 
 class IntakeDetail extends Component {
-//TODO: Link
 	constructor(props) {
 		super(props);
 		this.getServingString.bind(this);
@@ -15,7 +14,6 @@ class IntakeDetail extends Component {
 		let quantity = servings * hhServingSize;
 		return '' + quantity + ' ' + hhServingUom;
 	}
-	//TODO: bug if all stock has been deleted
 	render() {
 		return (
 			<div>
@@ -56,5 +54,4 @@ class IntakeDetail extends Component {
 	}
 }
 
-// <IntakeDetail intake={this.state.selectedIntake} source={this.state.source}>
 export default IntakeDetail;

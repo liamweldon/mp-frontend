@@ -8,16 +8,9 @@ export default class ProductService {
 		}
 	return this.instance;
  	}
-	// getProducts = () =>
-	// fetch(`${API_ROOT}/products`, {
-	// 	method: 'GET',
-	// 	headers: {
-	// 		'Content-Type' : 'application/json'
-	// 	}
-	// }).then((response) => response.json());
 
-	getProductByName = (name) => 
-		fetch(`${API_ROOT}/products/${name}/50`, {
+	getProductsByName = (name) => 
+		fetch(`${API_ROOT}/products/search/${name}/200`, {
 		method: 'GET',
 		headers: {
 			'Content-Type' : 'application/json'
